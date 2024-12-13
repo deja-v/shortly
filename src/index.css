@@ -71,6 +71,7 @@ input::placeholder {
   width: 350px;
   max-width: 100%;
   position: relative;
+  margin: 20px;
 }
 
 .wrapper input {
@@ -78,7 +79,7 @@ input::placeholder {
   border: 2px solid #9c9d9f;
   border-radius: 50px;
   padding: 1rem 2rem;
-  width: 100%;
+  width: 82%;
 }
 
 .wrapper button {
@@ -89,7 +90,8 @@ input::placeholder {
   height: 80%;
   width: 40%;
   position: absolute;
-  transform: translateX(195%);
+  /* transform: translateX(195%); */
+  right: 0;
   top: 10%;
   
 }
