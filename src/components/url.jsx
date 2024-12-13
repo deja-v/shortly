@@ -5,7 +5,7 @@ import axios from 'axios';
 import ShortenedUrl from "./shortenedUrl";
 export default function Url(){
     const [url, setUrl] = useState('');
-    const [shortUrl, setShortUrl] = useState('')
+    const [shortUrl, setShortUrl] = useState('https://api-ssl.bitly.com/v4/shorten')
     const [copied, setCopied] = useState(false);
     function handleChange(e) {
         setUrl(e.target.value);
@@ -62,12 +62,12 @@ export default function Url(){
                 <button type="submit">
                     Shorten Now!
                 </button>
-                {shortUrl && <ShortenedUrl url={shortUrl} onCopy={handleCopy} />}
-
-                {copied && <p className="copy-message">URL copied to clipboard!</p>}
+                
 
             </div>
             </form>
+            {shortUrl && <ShortenedUrl url={shortUrl} onCopy={handleCopy} />}
+            {copied && <p className="copy-message">URL copied to clipboard!</p>}
         </div>
     )
 }

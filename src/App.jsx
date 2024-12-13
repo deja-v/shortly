@@ -6,7 +6,7 @@ function App() {
 
   return (
     <>
-      <h2 className='title'>Shortly</h2>  
+      <a href="/"><h2 className='title'>Shortly</h2></a>  
       <Url />
 
       {/* <ShortenedLink /> */}

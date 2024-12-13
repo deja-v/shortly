@@ -33,6 +33,11 @@ body {
   background-clip: text;
 }
 
+a{
+  text-decoration: none;
+
+}
+
 .heading{
   font-size: 3.4rem;
 }
@@ -91,4 +96,29 @@ input::placeholder {
   padding-left: 25px;
   background: url("/src/assets/images/link-icon.svg") no-repeat left;
   background-size: 20px;
+}
+
+.shortened-url {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #797575ee;
+  width: 450px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.shortened-url p {
+  margin: 0;
+}
+
+.copy-button-shorten {
+  background-color: #144EE3;
+  color: aliceblue;
+  border: none;
+  border-radius: 5px;
+  padding: 4px;
+  cursor: pointer;
+  font-size: 14px;
 }
