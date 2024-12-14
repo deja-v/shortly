@@ -103,11 +103,15 @@ input::placeholder {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #797575ee;
+  background-color: rgba(255, 255, 255, 0.1);
   width: 450px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+}
+
+.shortened-url span{
+  color:rgba(255, 255, 255, 0.6);
 }
 
 .shortened-url p {

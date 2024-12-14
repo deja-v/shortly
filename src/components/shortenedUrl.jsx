@@ -8,7 +8,7 @@ export default function ShortenedUrl({ url, onCopy }) {
 
   return (
     <div className="shortened-url">
-      <p>Shortened URL: {url}</p>
+      <p>Shortened URL: <span>{url}</span></p>
       <button className="copy-button-shorten" onClick={handleCopy}>
         Copy
       </button>
