@@ -4,10 +4,12 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import ShortenedUrl from "./shortenedUrl";
+import UrlHistory from "./urlHistory";
 export default function Url(){
     const [url, setUrl] = useState('');
     const [shortUrl, setShortUrl] = useState('https://api-ssl.bitly.com/v4/shorten')
     const [copied, setCopied] = useState(false);
+    const [urlHistory, setUrlHistory] = useState([])
     function handleChange(e) {
         setUrl(e.target.value);
     }
@@ -39,7 +41,18 @@ export default function Url(){
       const shortenedUrl = response.data.link;
       
       setShortUrl(shortenedUrl)
-      console.log(shortUrl+" "+url)  
+      
+      console.log(shortUrl+" "+url)
+      
+      setUrlHistory((prev) => [
+        {
+          original:url,
+          shortened:shortUrl,
+          date: Date().toISOString()
+        },
+        ...prev
+      ])
+      console.log(urlHistory)
     }catch (error) {
         console.error(error);
       }
@@ -70,6 +83,7 @@ export default function Url(){
             </form>
             {shortUrl && <ShortenedUrl url={shortUrl} onCopy={handleCopy} />}
             {copied && <p className="copy-message">URL copied to clipboard!</p>}
+            {/* {true && <UrlHistory urlHistory={urlHistory}/>} */}
         </div>
     )
 }
