@@ -81,6 +81,7 @@ input::placeholder {
 .wrapper button {
   background: #144EE3;
   color: aliceblue;
+  cursor: pointer;
   border-radius: 50px;
   aspect-ratio: 1;
   height: 80%;

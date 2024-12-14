@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import ShortenedUrl from "./shortenedUrl";
 export default function Url(){
@@ -53,6 +54,7 @@ export default function Url(){
 
     return (
         <div className="url-paste-container">
+          <ToastContainer position="top-right"/>
             <h1 className="heading">Shorten Your Loooong Links</h1>
             <p>Shortly is an efficient and easy-to-use URL shortening service that streamlines your online experience. </p>
             <form onSubmit={handleSubmit} action="">
