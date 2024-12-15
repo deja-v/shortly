@@ -82,6 +82,7 @@ input::placeholder {
   background: #144EE3;
   color: aliceblue;
   cursor: pointer;
+  border: none;
   border-radius: 50px;
   aspect-ratio: 1;
   height: 80%;
@@ -89,8 +90,12 @@ input::placeholder {
   position: absolute;
   /* transform: translateX(195%); */
   right: 0;
-  top: 10%;
-  
+  top: 10%; 
+  transition: 0.4s;
+}
+.wrapper button:hover{
+  background: #2c67fc;
+  transition: 0.4s;
 }
 
 .icon {
@@ -104,7 +109,7 @@ input::placeholder {
   align-items: center;
   justify-content: space-between;
   background-color: rgba(255, 255, 255, 0.1);
-  width: 450px;
+  width: 300px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -127,3 +132,71 @@ input::placeholder {
   cursor: pointer;
   font-size: 14px;
 }
+
+.url-history {
+  margin-top: 30px;
+  overflow: auto;
+  width: 100%;
+}
+
+.url-history h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #C9CED6;
+}
+
+.url-history table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.url-history th,
+.url-history td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+  color: #C9CED6;
+
+}
+
+.url-history th {
+  font-weight: bold;
+  color: #C9CED6;
+}
+
+.url-history td:first-child {
+  width: 38%;
+}
+
+.url-history td:last-child {
+  
+  width: 10%;
+}
+
+.url-history td:nth-child(1),
+.url-history td:nth-child(2),
+.url-history td:nth-child(3) {
+  word-break: break-all;
+}
+
+.url-history button {
+  background-color: #353C4A;
+  color: #fff;
+  border-radius: 40%;
+  border: none;
+  padding: 8px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 0;
+  transition: 0.3s;
+  }
+
+  .url-history button:hover {
+  background-color: #d32f2f;
+  transition: 0.3s;
+  }
+
+  .copy-message {
+  margin-top: 10px;
+  color: #009688;
+  }

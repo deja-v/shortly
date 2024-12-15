@@ -73,11 +73,11 @@ export default function Url(){
     }
 
     function handleCopy ()  {
-        setCopied(true);
+        setCopied(true)
         setTimeout(() => {
-          setCopied(false);
-        }, 3000);
-      };
+          setCopied(false)
+        }, 3000)
+      }
       console.log(urlHistory)
     return (
         <div className="url-paste-container">
@@ -97,7 +97,7 @@ export default function Url(){
             </form>
             {shortUrl && <ShortenedUrl url={shortUrl} onCopy={handleCopy} />}
             {copied && <p className="copy-message">URL copied to clipboard!</p>}
-            {/* {true && <UrlHistory urlHistory={urlHistory}/>} */}
+            {urlHistory.length>0 && <UrlHistory urlHistory={urlHistory}/>}
         </div>
     )
 }
