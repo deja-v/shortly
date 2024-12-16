@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import ShortenedUrl from "./shortenedUrl";
 import UrlHistory from "./urlHistory";
+import useEffectAfterFirstRender from "./custom hooks/useEffectAfterFirstRender";
 export default function Url(){
     const [url, setUrl] = useState('')
     const [shortUrl, setShortUrl] = useState(null)
@@ -78,11 +79,7 @@ export default function Url(){
           
     }
 
-    useEffect(()=>{
-      if(isInitialRender.current){
-        isInitialRender.current = false
-        return;
-      }
+    useEffectAfterFirstRender(()=>{
       if(shortUrl){
         function formatDate(currentDate){
           const day = String(currentDate.getDate()).padStart(2, '0');
