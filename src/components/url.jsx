@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
@@ -7,9 +7,10 @@ import ShortenedUrl from "./shortenedUrl";
 import UrlHistory from "./urlHistory";
 export default function Url(){
     const [url, setUrl] = useState('')
-    const [shortUrl, setShortUrl] = useState('')
+    const [shortUrl, setShortUrl] = useState(null)
     const [copied, setCopied] = useState(false)
     const [urlHistory, setUrlHistory] = useState([])
+    const isInitialRender = useRef(true);
     function handleChange(e) {
         setUrl(e.target.value)
     }
@@ -20,57 +21,92 @@ export default function Url(){
         if (!url) {
             toast.error('Please enter a URL')
             return;
-        }
-        const accessToken = "f05b4228821a79783b10c605aa6007bb6fa574b1"
-        const apiUrl = 'https://api-ssl.bitly.com/v4/shorten';
+        } 
+        
+          async function getURL(url) {
+            // let body = {
+            //   url: url,
+            //   domain: `tinyurl.com`
+            // }
 
-        const formattedUrl = /^(https?|ftp):\/\//i.test(url) ? url : `http://${url}`;
+            // fetch(`https://api.tinyurl.com/create`, {
+            //   method: `POST`,
+            //   headers: {
+            //     accept: `application/json`,
+            //     authorization: `Bearer eAoWeAFuj5K9A4CRlWEyPZuI7W7nin4638vA9zY1m00UrVslNG4E0BWIqAwI`,
+            //     'content-type': `application/json`,
+            //   },
+            //   body: JSON.stringify(body)
+            // })
+            // .then(response => {
+            //   if (response.status != 200) throw `There was a problem with the fetch operation. Status Code: ${response.status}`;
+            //   return response.json()
+            // })
+            // .then(data => {
+            //   return data.data.tiny_url
+            // }).catch ((error) => 
+            //   console.error(error));
 
-        try {
-          const response = await axios.post(
-            apiUrl,
-            { long_url: formattedUrl },
-            {
-              headers: {
-                Authorization: `Bearer ${accessToken}`,
-                'Content-Type': 'application/json',
-              },
+            const apiUrl = 'https://api.tinyurl.com/create';
+            const headers = {
+              accept: 'application/json',
+              authorization: 'Bearer eAoWeAFuj5K9A4CRlWEyPZuI7W7nin4638vA9zY1m00UrVslNG4E0BWIqAwI',
+              'content-type': 'application/json',
+            };
+          
+            const body = {
+              url: url,
+              domain: 'tinyurl.com',
+            };
+          
+            try {
+              const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers,
+                body: JSON.stringify(body),
+              });
+              const data = await response.json();
+              return data.data.tiny_url
+            } catch (error) {
+              console.error('Error creating short URL:', error);
+              throw error;
             }
-          );
-
-          const shortenedUrl = response.data.link;
-          
-          setShortUrl(shortenedUrl)
-          
-          console.log(shortUrl+" "+url)
-          
-          function formatDate(currentDate){
-            const day = String(currentDate.getDate()).padStart(2, '0');
-            const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-            const year = currentDate.getFullYear();
-            let hours = currentDate.getHours();
-            const minutes = String(currentDate.getMinutes()).padStart(2, '0');
-            const seconds = String(currentDate.getSeconds()).padStart(2, '0');
-            const amPm = hours >= 12 ? 'PM' : 'AM';
-            hours = hours % 12 || 12; 
-
-            const formattedDateTime = `${day}/${month}/${year} ${String(hours).padStart(2, '0')}:${minutes}:${seconds} ${amPm}`;
-            return formattedDateTime
           }
-          const currentDate = new Date();
-          const newObj = {
-            original:url,
-            shortened:shortenedUrl,
-            date: formatDate(currentDate)
-          }
-          const updatedHistory = [newObj, ...urlHistory]
-          setUrlHistory(updatedHistory)
+
+          const shortened = await getURL(url);
+          setShortUrl(shortened)
           
-          
-    }catch (error) {
-        console.error(error);
-      }
     }
+
+    useEffect(()=>{
+      if(isInitialRender.current){
+        isInitialRender.current = false
+        return;
+      }
+      if(shortUrl){
+        function formatDate(currentDate){
+          const day = String(currentDate.getDate()).padStart(2, '0');
+          const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+          const year = currentDate.getFullYear();
+          let hours = currentDate.getHours();
+          const minutes = String(currentDate.getMinutes()).padStart(2, '0');
+          const seconds = String(currentDate.getSeconds()).padStart(2, '0');
+          const amPm = hours >= 12 ? 'PM' : 'AM';
+          hours = hours % 12 || 12; 
+  
+          const formattedDateTime = `${day}/${month}/${year} ${String(hours).padStart(2, '0')}:${minutes}:${seconds} ${amPm}`;
+          return formattedDateTime
+        }
+        const currentDate = new Date();
+        const newObj = {
+          original:url,
+          shortened:shortUrl,
+          date: formatDate(currentDate)
+        }
+        const updatedHistory = [newObj, ...urlHistory]
+        setUrlHistory(updatedHistory)
+      }
+      },[shortUrl])
 
     function handleCopy ()  {
         setCopied(true)
@@ -97,7 +133,7 @@ export default function Url(){
             </form>
             {shortUrl && <ShortenedUrl url={shortUrl} onCopy={handleCopy} />}
             {copied && <p className="copy-message">URL copied to clipboard!</p>}
-            {urlHistory.length>0 && <UrlHistory urlHistory={urlHistory}/>}
+            {urlHistory.length>0 && <UrlHistory urlHistory={urlHistory} />}
         </div>
     )
 }

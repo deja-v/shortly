@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { FaCopy } from "react-icons/fa6";
 
@@ -9,7 +9,9 @@ export default function UrlHistory({urlHistory}){
       navigator.clipboard.writeText(url)
       toast.success('URL copied to clipboard!');
     }
+   
     
+              
     const tableElements = urlHistory.map(({ original, shortened, date },index) => (
       <tr key={index}>
         <td>{original}</td>
