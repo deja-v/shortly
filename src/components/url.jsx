@@ -6,6 +6,7 @@ import axios from 'axios';
 import ShortenedUrl from "./shortenedUrl";
 import UrlHistory from "./urlHistory";
 import useEffectAfterFirstRender from "./custom hooks/useEffectAfterFirstRender";
+import { apiKey } from "./api";
 export default function Url(){
     const [url, setUrl] = useState('')
     const [shortUrl, setShortUrl] = useState(null)
@@ -34,7 +35,7 @@ export default function Url(){
             //   method: `POST`,
             //   headers: {
             //     accept: `application/json`,
-            //     authorization: `Bearer eAoWeAFuj5K9A4CRlWEyPZuI7W7nin4638vA9zY1m00UrVslNG4E0BWIqAwI`,
+            //     authorization: `Bearer ${apiKey}`,
             //     'content-type': `application/json`,
             //   },
             //   body: JSON.stringify(body)
@@ -51,7 +52,7 @@ export default function Url(){
             const apiUrl = 'https://api.tinyurl.com/create';
             const headers = {
               accept: 'application/json',
-              authorization: 'Bearer eAoWeAFuj5K9A4CRlWEyPZuI7W7nin4638vA9zY1m00UrVslNG4E0BWIqAwI',
+              authorization: `Bearer ${process.env.apiKey}`,
               'content-type': 'application/json',
             };
           
