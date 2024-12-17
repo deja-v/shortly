@@ -6,7 +6,6 @@ import axios from 'axios';
 import ShortenedUrl from "./shortenedUrl";
 import UrlHistory from "./urlHistory";
 import useEffectAfterFirstRender from "./custom hooks/useEffectAfterFirstRender";
-import { apiKey } from "./api";
 export default function Url(){
     const [url, setUrl] = useState('')
     const [shortUrl, setShortUrl] = useState(null)
