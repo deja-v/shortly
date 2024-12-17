@@ -112,8 +112,8 @@ export default function Url(){
           setCopied(false)
         }, 3000)
       }
-      console.log(urlHistory)
-    return (
+
+      return (
         <div className="url-paste-container">
           <ToastContainer position="top-right"/>
             <h1 className="heading">Shorten Your Loooong Links</h1>
