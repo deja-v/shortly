@@ -37,7 +37,7 @@ Follow these steps to set up the project locally:
 
 ## Screenshots
 
-![Shortly Homepage](./src/assets/images "Shortly Homepage")
+![Shortly Homepage](./src/assets/images/Screenshot%20(570).png "Shortly Homepage")
 
 ## Future Improvements
 
